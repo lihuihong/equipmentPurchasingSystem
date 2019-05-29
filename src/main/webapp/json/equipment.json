@@ -1,0 +1,17 @@
+{
+	"code":0,
+	"msg":"",
+	"count":10,
+	"data":[
+		{"id":"001","sn":"设备01","nameStudent":"小王","nameParent":"大王","deviceStatus":0,"logonStatus":0},
+		{"id":"002","sn":"设备02","nameStudent":"小张","nameParent":"大张","deviceStatus":0,"logonStatus":0},
+		{"id":"003","sn":"设备03","nameStudent":"小李","nameParent":"大李","deviceStatus":1,"logonStatus":1},
+		{"id":"004","sn":"设备04","nameStudent":"小洪","nameParent":"大洪","deviceStatus":1,"logonStatus":0},
+		{"id":"005","sn":"设备05","nameStudent":"小军","nameParent":"大军","deviceStatus":1,"logonStatus":1},
+		{"id":"006","sn":"设备06","nameStudent":"小龙","nameParent":"大龙","deviceStatus":1,"logonStatus":0},
+		{"id":"007","sn":"设备07","nameStudent":"小德","nameParent":"大德","deviceStatus":0,"logonStatus":0},
+		{"id":"008","sn":"设备08","nameStudent":"小宋","nameParent":"大宋","deviceStatus":1,"logonStatus":0},
+		{"id":"009","sn":"设备09","nameStudent":"小方","nameParent":"大方","deviceStatus":0,"logonStatus":0},
+		{"id":"010","sn":"设备10","nameStudent":"小飞","nameParent":"大飞","deviceStatus":0,"logonStatus":0}
+	]
+}

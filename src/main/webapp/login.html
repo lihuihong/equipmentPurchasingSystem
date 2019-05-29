@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>登录-设备采购管理系统</title>
+	<meta name="keywords" content="设备采购管理系统">
+	<meta name="description" content="设备采购管理系统">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="icon" href="images/logo_icon.png">
+	<link rel="stylesheet" href="layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="css/login.css" media="all">
+</head>
+<body>
+	<div class="layui-container">
+		<div class="layui-row">
+			<div class="layui-col-lg12 p1">
+				<span><img src="images/logo_icon.png"/></span><span><b>设备采购管理系统</b><cite>Teaching Equipment Purchasing Management System</cite></span>
+			</div>
+		</div>
+		<div class="layui-row">
+			<div class="layui-col-lg12 p2">
+				<div class="layui-col-lg6">&nbsp;</div>
+				<div class="layui-col-lg6">
+					<form class="layui-form">
+						<div class="box">
+							<div class="title"><span>用户登录</span></div>
+							<div class="content">
+								<div class="layui-form-item t">
+									<div class="layui-form-label">账&nbsp;&nbsp;&nbsp;&nbsp;号：</div>
+									<div class="layui-input-block">
+										<input type="text" name="userName" required lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+								<div class="layui-form-item t">
+									<div class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码：</div>
+									<div class="layui-input-block">
+										<input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+								<div class="layui-form-item t">
+									<div class="layui-form-label">角&nbsp;&nbsp;&nbsp;&nbsp;色：</div>
+									<div class="layui-input-block">
+										<input type="radio" name="roleId" checked value="1" title="管理员" class="layui-input">
+										<input type="radio" name="roleId" value="3" title="采购员" class="layui-input">
+									</div>
+								</div>
+								<div class="tips"></div>
+							</div>
+							<div class="btn">
+								<button class="layui-btn" lay-submit lay-filter="submit">立即登录</button>
+								<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="p3">Copyright 2019 设备采购管理系统</div>
+	</div>
+</body>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script>
+layui.use('form', function(){
+	var form = layui.form;
+	var $ = layui.jquery;
+	//监听提交
+	form.on('submit(submit)',function(data){
+		$.ajax({
+			url:'/user/login',
+			type:'post',
+			data:data.field,
+			dataType:"json",
+			beforeSend:function(){
+				//do something
+			},
+			success:function(data){
+				//do something
+				if(data.code===0){
+					location.href="/page/main";
+				} else {
+					layer.msg(data.msg,{icon: 2});
+					//$('.tips').text(data.msg);
+				}
+			},
+			error:function(data){
+				//do something
+				layer.msg('与服务器连接失败',{icon: 2});
+			}
+		});
+		return false;
+	});
+});
+</script>
+</html>

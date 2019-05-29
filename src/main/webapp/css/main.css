@@ -1,0 +1,34 @@
+body {font-size:14px;font-family:Helvetica,Microsoft YaHei,SimSun,Arial,Tahoma;background:rgb(255,255,255)}
+/*顶部样式*/
+.layui-header {margin-left:220px;background: url("../images/top-bg.png") center center no-repeat}
+.layui-header .box {height:60px;}
+.layui-header .box .btnHeader {display:inline-block;height:60px;padding:0px 25px;line-height:60px; color:rgba(255,255,255,0.8);text-align:center;background:rgba(0,0,0,0)}
+.layui-header .box .btnHeader:hover {color:rgba(255,255,255,1);background:rgba(0,0,0,0.3)}
+.layui-header .box .navHeader {display:inline-block;cursor:pointer}
+.layui-header .box .navHeader .layui-nav-item {vertical-align:inherit}
+.layui-header .header-left {float:left}
+.layui-header .header-right {float:right}
+
+/*导航样式*/
+.layui-side {width:220px;}
+.layui-side-scroll {background:rgb(68,72,84)}
+.layui-side .layui-icon {display:inline-block;width:40px;font-size:18px;}
+.layui-nav-tree {width:100%;}
+.layui-logo {background: #0c4152;text-align: center;margin: 0 auto;color: #fff}
+.layui-nav {border-radius:0px;background: transparent}
+.layui-tab-title{border: none;background-color: transparent}
+.layui-tab-title li{background: url("../images/tab.png") center center no-repeat;background-size: 100% 100%;color: #fff;border: none}
+.layui-tab-title .layui-this{color: #fff}
+.layui-tab-title .layui-this:after{border: none}
+/*主体样式*/
+.layui-bodier {margin-left:220px;padding:10px 20px;background: #eaecf2;}
+.layui-bodier .firstTab i {display:none}
+.tabFrame {width:100%;}
+.layui-side-scroll {background: rgb(12,65,82);}
+.layui-nav-tree .layui-nav-item {border-bottom: 1px #35606e solid;}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover {background-color: #0d7fa3;}
+.layui-nav-tree .layui-nav-bar{display: none}
+.layui-nav-tree .layui-nav-child a{border-bottom: 1px #104d61 solid  }
+.layui-nav-tree .layui-nav-item a:hover {background-color: #0d7fa3;}
+/*版权信息*/
+.layui-footer {position:fixed;bottom:0px;width:100%;height:40px;line-height:40px;background:rgb(255,255,255);color:rgb(102,102,102);border-top:1px rgb(242,242,242) solid;text-align:center}
