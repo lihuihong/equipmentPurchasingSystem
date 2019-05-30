@@ -82,6 +82,42 @@ public class Equipment  {
     private String isRes;
     private String isType;
     private String username;
+    private String departmentName;
+    private String departmentId;
+    private String equipmentUser;
+    private String eqUser;
+
+    public String getEquipmentUser() {
+        return equipmentUser;
+    }
+
+    public void setEquipmentUser(String equipmentUser) {
+        this.equipmentUser = equipmentUser;
+    }
+
+    public String getEqUser() {
+        return eqUser;
+    }
+
+    public void setEqUser(String eqUser) {
+        this.eqUser = eqUser;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 
     public String getUsername() {
         return username;

@@ -62,10 +62,12 @@ layui.use('table', function(){
 			{field:'sortName1', title: '所属分类', align:'center'},
 			{field:'username', title: '设备负责人', align:'center'},
             {field:'eqName', title: '设备名称', align:'center'},
-            {field:'model', title: '设备型号', align:'center'},
+            {field:'model', title: '设备型号', align:'center',hide:'true'},
+            {field:'eqUser', title: '设备使用者', align:'center'},
+            {field:'departmentName', title: '所属部门', align:'center'},
             {field:'unitPrice', title: '设备单价', align:'center',hide:'true'},
             {field:'placeOfOrigin', title: '设备产地', align:'center',hide:'true'},
-            {field:'supName1', title: '供应商', align:'center'},
+            {field:'supName1', title: '供应商', align:'center',hide:'true'},
             {field:'isType', title: '设备状态', align:'center', templet:
 						function (d) {
 							if (d.isType === "1") {
@@ -74,7 +76,7 @@ layui.use('table', function(){
 								return "可借用";
 							}
 						}},
-            {field:'remakes', title: '备注', align:'center'},
+            {field:'remakes', title: '备注', align:'center',hide:'true'},
 			{fixed: 'right',title: '操作', align:'center',toolbar: '#barDemo'	}
 		]],
 		page: true

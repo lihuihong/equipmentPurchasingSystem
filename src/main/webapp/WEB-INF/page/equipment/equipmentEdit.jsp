@@ -39,6 +39,13 @@
 					</select>
 				</div>
 			</div>
+			<div class="layui-form-item">
+				<div class="layui-form-label">所属部门</div>
+				<div class="layui-input-inline">
+					<select name="departmentId" id="departmentId" lay-verify="required">
+					</select>
+				</div>
+			</div>
 			<div class="layui-form-item ">
 				<div class="layui-form-label">设备名称</div>
 				<div class="layui-input-block" >
@@ -49,6 +56,13 @@
 				<div class="layui-form-label">设备的负责人</div>
 				<div class="layui-input-block" >
 					<select name="isUser" id="isUser">
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-form-label">设备的使用者</div>
+				<div class="layui-input-block" >
+					<select name="equipmentUser" id="equipmentUser">
 					</select>
 				</div>
 			</div>
@@ -132,6 +146,30 @@
 			$("#isOk").val(info.isOk);
 			form.render();
 		}
+
+		$.ajax({
+			url:'/user/list',
+			type:'post',
+			data:{'page':1,'limit':999999},
+			dataType:"json",
+			success:function(data){
+				var html = '<option value="">请选择供应商</option>';
+				if(data.code===0){
+					$.each(data.data,function(index,value){
+						// console.log(data.data);
+						html += '<option value="'+value.id+'">'+value.id+'['+value.userName+']'+'</option>';
+						//alert(html);
+						// console.log(value.supId+'['+value.supName+']')
+					});
+					//alert(html);
+					$('#equipmentUser').html(html);
+					if (info.equipmentUser != null) {
+						$("#equipmentUser").val(info.equipmentUser)
+					}
+				}
+				form.render('select'); //重新渲染select
+			},
+		});
 		//供应商下拉选项
 		$.ajax({
 			url:'/supplier/list',
@@ -153,6 +191,29 @@
 					}
 				}
 				form.render('select'); //重新渲染select
+			},
+		});
+		//获取部门列表
+		$.ajax({
+			url:'/department/list',
+			type:'get',
+			dataType:"json",
+			success:function(data){
+				var html = '';
+				if(data.code===0){
+					$.each(data.data,function(index,value){
+						html += '<option value="'+value.id+'">'+value.name+'</option>';
+						//alert(html);
+					});
+					//alert(html);
+					$('#departmentId').html(html);
+					if (info.departmentId != null) {
+						$("#departmentId").val(info.departmentId )
+					}
+					form.render('select');
+				} else {
+					layer.alert('抱歉，系统繁忙，请稍后再试！',{icon:2});
+				}
 			},
 		});
 		$.ajax({
