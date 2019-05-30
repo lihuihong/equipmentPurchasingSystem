@@ -44,6 +44,13 @@
 					<input type="text" name="eqName"  required lay-verify="required" placeholder="请输入设备名称" autocomplete="off" class="layui-input">
 				</div>
 			</div>
+			<div class="layui-form-item">
+				<div class="layui-form-label">设备的负责人</div>
+				<div class="layui-input-block" >
+					<select name="isUser" id="isUser">
+					</select>
+				</div>
+			</div>
 
 			<div class="layui-form-item ">
 				<div class="layui-form-label">设备型号</div>
@@ -63,10 +70,11 @@
 					<input type="text" name="placeOfOrigin"  required lay-verify="required" placeholder="请输入设备产地" autocomplete="off" class="layui-input">
 				</div>
 			</div>
-			<div class="layui-form-item ">
-				<div class="layui-form-label">供应商</div>
-				<div class="layui-input-block" >
-					<input type="text" name="supName"  required lay-verify="required" placeholder="请输入供应商" autocomplete="off" class="layui-input">
+			<div class="layui-form-item">
+				<div class="layui-form-label">供应商编号</div>
+				<div class="layui-input-block">
+					<select name="supName" id="supName">
+					</select>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
@@ -84,6 +92,7 @@
 </body>
 <script src=" /layui/layui.js" charset="utf-8"></script>
 <script>
+	var info = parent.preDate;
 layui.use(['form',], function(){
 	var form = layui.form;
 	var $ = layui.jquery;
@@ -99,7 +108,6 @@ layui.use(['form',], function(){
 					// console.log(data.data);
 					html += '<option value="'+value.sortId+'">'+value.sortName+'</option>';
 					//alert(html);
-					// console.log(value.supId+'['+value.supName+']')
 				});
 				//alert(html);
 				$('#sortName').html(html);
@@ -107,13 +115,53 @@ layui.use(['form',], function(){
 			form.render('select'); //重新渲染select
 		},
 	});
+	//供应商下拉选项
+	$.ajax({
+		url:'/supplier/list',
+		type:'post',
+		dataType:"json",
+		success:function(data){
+			var html = '<option value="">请选择供应商</option>';
+			if(data.code===0){
+				$.each(data.data,function(index,value){
+					// console.log(data.data);
+					html += '<option value="'+value.supId+'">'+value.supId+'['+value.supName+']'+'</option>';
+					//alert(html);
+					// console.log(value.supId+'['+value.supName+']')
+				});
+				//alert(html);
+				$('#supName').html(html);
+			}
+			form.render('select'); //重新渲染select
+		},
+	});
+	$.ajax({
+		url:'/user/list',
+		type:'post',
+		data:{'page':1,'limit':999999},
+		dataType:"json",
+		success:function(data){
+			var html = '<option value="">请选择供应商</option>';
+			if(data.code===0){
+				$.each(data.data,function(index,value){
+					// console.log(data.data);
+					html += '<option value="'+value.id+'">'+value.id+'['+value.userName+']'+'</option>';
+					//alert(html);
+					// console.log(value.supId+'['+value.supName+']')
+				});
+				//alert(html);
+				$('#isUser').html(html);
+			}
+			form.render('select'); //重新渲染select
+		},
+	});
 	//监听提交
-	form.on('submit(submit)',function(data){
+	form.on('submit(submit)',function(dataInfo){
 		layer.confirm('是否确定新增？',{icon: 3, title:'系统信息'},function(index){
 			$.ajax({
 				url:'/equipment/save',
 				type:'post',
-				data:data.field,
+				data:dataInfo.field,
 				dataType:"json",
 				beforeSend:function(){
 					//console.log(JSON.stringify(data.field));
@@ -121,10 +169,32 @@ layui.use(['form',], function(){
 				success:function(data){
 					//do something
 					if(data.code==0){
-						var index = parent.layer.getFrameIndex(window.name);//获取当前窗口索引
-						parent.layer.msg('添加成功', {icon : 1});
-						parent.layer.close(index);
-						parent.layui.table.reload('tableList');//重新加载父级tabel数据
+						if(info != null){
+							$.ajax({
+								url:'/purchase/save',
+								type:'post',
+								data:{ 'orderId': info.orderId,"supId":dataInfo.field.supName,"eqId":data.data},
+								dataType:"json",
+								beforeSend:function(){
+									//console.log(JSON.stringify(data.field));
+								},
+								success:function(data){
+									//do something
+									if(data.code==0){
+										var index = parent.layer.getFrameIndex(window.name);//获取当前窗口索引
+										parent.layer.msg('添加成功', {icon : 1});
+										parent.layer.close(index);
+										parent.layui.table.reload('tableList');//重新加载父级tabel数据
+									} else {
+										layer.alert('抱歉，系统繁忙，请稍后再试！',{icon:2});
+									}
+								},
+								error:function(data){
+									//do something
+									layer.msg('与服务器连接失败',{icon: 2});
+								}
+							});
+						}
 					} else {
 						layer.alert('抱歉，系统繁忙，请稍后再试！',{icon:2});
 					}

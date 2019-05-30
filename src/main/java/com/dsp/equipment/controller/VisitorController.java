@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -92,11 +93,11 @@ public class VisitorController {
     @RequestMapping(value = "/save")
     @ResponseBody
     public Result save(User s_user, HttpServletRequest request, HttpServletResponse response)throws Exception{
-
+        SimpleDateFormat aDate=new SimpleDateFormat("yyyy-mm-dd  HH:mm:ss");
         Result result = new Result();
         int resultTotal = 0;
         if(s_user.getId()==null){
-            s_user.setAddTime(new Date());
+            s_user.setAddTime(aDate.format(new Date()));
             resultTotal=userService.add(s_user);
         }else{
             resultTotal=userService.update(s_user);

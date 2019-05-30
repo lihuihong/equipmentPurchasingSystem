@@ -46,27 +46,27 @@
 					<input type="text" name="orderTime" id="orderTime" disabled required lay-verify="required" placeholder="请输入日期" autocomplete="off" class="layui-input">
 				</div>
 			</div>
-			<div class="layui-form-item">
+			<%--<div class="layui-form-item">
 				<div class="layui-form-label">供应商编号</div>
 				<div class="layui-input-block">
 					<select name="supId" id="supId">
 					</select>
 				</div>
-			</div>
+			</div>--%>
 			<div class="layui-form-item ">
-				<div class="layui-form-label">采购员编号</div>
+				<div class="layui-form-label">申请人编号</div>
 				<div class="layui-input-block" >
 					<select name="userId" id="userId">
 					</select>
 				</div>
 			</div>
-			<div class="layui-form-item">
+			<%--<div class="layui-form-item">
 				<div class="layui-form-label">设备编号</div>
 				<div class="layui-input-block">
 					<select name="eqId" id="eqId">
 					</select>
 				</div>
-			</div>
+			</div>--%>
 
 			<div class="layui-form-item ">
 				<div class="layui-form-label">订购数量</div>

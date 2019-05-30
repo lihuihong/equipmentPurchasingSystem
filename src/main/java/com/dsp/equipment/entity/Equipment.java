@@ -52,6 +52,7 @@ public class Equipment  {
      *   供应商
      */
     private String supName;
+    private String supName1;
 
     /**
      * Database Column Remarks:
@@ -80,6 +81,23 @@ public class Equipment  {
     private String isUser;
     private String isRes;
     private String isType;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getSupName1() {
+        return supName1;
+    }
+
+    public void setSupName1(String supName1) {
+        this.supName1 = supName1;
+    }
 
     public String getIsType() {
         return isType;

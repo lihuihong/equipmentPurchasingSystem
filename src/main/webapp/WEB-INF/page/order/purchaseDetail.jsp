@@ -55,9 +55,9 @@
 				</div>
 			</div>
 			<div class="layui-form-item ">
-				<div class="layui-form-label">采购员编号</div>
+				<div class="layui-form-label">申请人编号</div>
 				<div class="layui-input-block" >
-					<input type="text" name="id" value="1001" disabled required lay-verify="required" placeholder="请输入采购员编号" autocomplete="off" class="layui-input">
+					<input type="text" name="id" value="1001" disabled required lay-verify="required" placeholder="请输入申请人编号" autocomplete="off" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">

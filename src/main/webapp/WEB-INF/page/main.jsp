@@ -58,8 +58,8 @@
             <ul class="layui-nav layui-nav-tree" lay-filter="nav" id="menu">
                 <li data-name="get" class="layui-nav-item layui-this">
                     <a href="javascript:;" lay-href="" class="nav-tab" lay-id="home1"
-                       data-type="tabChange" lay-tips="控制台">
-                        <i class="layui-icon layui-icon-theme"></i><label>控制台</label>
+                       data-type="tabChange" lay-tips="欢迎页">
+                        <i class="layui-icon layui-icon-theme"></i><label>欢迎页</label>
                     </a>
                 </li>
             </ul>
@@ -69,7 +69,7 @@
     <div class="layui-bodier">
         <div class="layui-tab" lay-filter="tab" lay-allowClose="true">
             <ul class="layui-tab-title">
-                <li class="firstTab layui-this" lay-id="home1">控制台</li>
+                <li class="firstTab layui-this" lay-id="home1">欢迎页</li>
             </ul>
             <div class="layui-tab-content">
                 <div class="layui-tab-item layui-show">

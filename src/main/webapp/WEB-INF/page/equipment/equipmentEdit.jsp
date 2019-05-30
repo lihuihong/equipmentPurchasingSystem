@@ -39,6 +39,19 @@
 					</select>
 				</div>
 			</div>
+			<div class="layui-form-item ">
+				<div class="layui-form-label">设备名称</div>
+				<div class="layui-input-block" >
+					<input type="text" name="eqName"  required lay-verify="required" placeholder="请输入设备名称" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-form-label">设备的负责人</div>
+				<div class="layui-input-block" >
+					<select name="isUser" id="isUser">
+					</select>
+				</div>
+			</div>
 			<div class="layui-form-item">
 				<div class="layui-form-label">是否过期</div>
 				<div class="layui-input-block">
@@ -57,12 +70,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="layui-form-item ">
-				<div class="layui-form-label">设备名称</div>
-				<div class="layui-input-block" >
-					<input type="text" name="eqName"  required lay-verify="required" placeholder="请输入设备名称" autocomplete="off" class="layui-input">
-				</div>
-			</div>
+
 
 			<div class="layui-form-item ">
 				<div class="layui-form-label">设备型号</div>
@@ -82,10 +90,11 @@
 					<input type="text" name="placeOfOrigin"  required lay-verify="required" placeholder="请输入设备产地" autocomplete="off" class="layui-input">
 				</div>
 			</div>
-			<div class="layui-form-item ">
-				<div class="layui-form-label">供应商</div>
-				<div class="layui-input-block" >
-					<input type="text" name="supName"  required lay-verify="required" placeholder="请输入供应商" autocomplete="off" class="layui-input">
+			<div class="layui-form-item">
+				<div class="layui-form-label">供应商编号</div>
+				<div class="layui-input-block">
+					<select name="supName" id="supName">
+					</select>
 				</div>
 			</div>
 			<div class="layui-form-item layui-form-text">
@@ -123,6 +132,52 @@
 			$("#isOk").val(info.isOk);
 			form.render();
 		}
+		//供应商下拉选项
+		$.ajax({
+			url:'/supplier/list',
+			type:'post',
+			dataType:"json",
+			success:function(data){
+				var html = '<option value="">请选择供应商</option>';
+				if(data.code===0){
+					$.each(data.data,function(index,value){
+						// console.log(data.data);
+						html += '<option value="'+value.supId+'">'+value.supId+'['+value.supName+']'+'</option>';
+						//alert(html);
+						// console.log(value.supId+'['+value.supName+']')
+					});
+					//alert(html);
+					$('#supName').html(html);
+					if (info.supName != null){
+						$("#supName").val(info.supName)
+					}
+				}
+				form.render('select'); //重新渲染select
+			},
+		});
+		$.ajax({
+			url:'/user/list',
+			type:'post',
+			data:{'page':1,'limit':999999},
+			dataType:"json",
+			success:function(data){
+				var html = '<option value="">设备的负责人</option>';
+				if(data.code===0){
+					$.each(data.data,function(index,value){
+						// console.log(data.data);
+						html += '<option value="'+value.id+'">'+value.id+'['+value.userName+']'+'</option>';
+						//alert(html);
+						// console.log(value.supId+'['+value.supName+']')
+					});
+					//alert(html);
+					$('#isUser').html(html);
+					if (info.isUser != null){
+						$('#isUser').val(info.isUser)
+					}
+				}
+				form.render('select'); //重新渲染select
+			},
+		});
 		//设备下拉选项
 		$.ajax({
 			url:'/sort/list',

@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="email" column="email"></result>
         <result property="phone" column="phone"></result>
         <result property="addTime" column="add_time"></result>
+        <result property="departmentId" column="departmentId"></result>
         <result property="roleId" column="roleId"></result>
         <association property="role" column="roleId" select="com.dsp.equipment.dao.RoleDao.findById"></association>
     </resultMap>
@@ -30,11 +31,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="list" parameterType="java.lang.Integer" resultMap="UserResult">
-        select * from sys_user
+        select s.*,d.name as departmentId1 from sys_user as s left join department as d on d.id = s.departmentId
         where 1=1
             <if test="userName!=null and userName!=''">
                 and userName like CONCAT('%',#{userName},'%')
             </if>
+        <if test="trueName!=null and trueName!=''">
+            and trueName like CONCAT('%',#{trueName},'%')
+        </if>
     </select>
 
     <select id="getTotal" parameterType="Map" resultType="Long">
@@ -47,7 +51,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="add" parameterType="User">
-        insert into sys_user values (null,#{userName},#{password},#{trueName},#{email},#{phone},#{roleId},#{addTime})
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                userName,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="trueName != null">
+                trueName,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="roleId != null">
+                roleId,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="departmentId != null">
+                departmentId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=Integer},
+            </if>
+            <if test="userName != null">
+                  #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="trueName != null">
+                #{trueName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=DOUBLE},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=TIMESTAMP},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=VARCHAR},
+            </if>
+
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=VARCHAR},
+            </if>
+        </trim>
     </insert>
 
     <update id="update" parameterType="User">
@@ -69,7 +132,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 phone=#{phone},
             </if>
             <if test="roleId!=null and roleId!=''">
-                roleId=#{roleId}
+                roleId=#{roleId},
+            </if>
+            <if test="departmentId!=null and departmentId!=''">
+                departmentId=#{departmentId}
             </if>
         </set>
         where id=#{id}

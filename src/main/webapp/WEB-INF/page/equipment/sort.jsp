@@ -43,9 +43,9 @@
 <div class="layui-search">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">分类名称</label>
+            <label class="layui-form-label">查询信息</label>
             <div class="layui-input-inline">
-                <input type="text" name="sortName" id="sortName" autocomplete="off" placeholder="请输入分类名称"
+                <input type="text" name="sortName" id="sortName" autocomplete="off" placeholder="请输入相关信息"
                        class="layui-input">
             </div>
             <button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit>查询</button>

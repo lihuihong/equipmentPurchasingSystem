@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<title>设备管理-设备信息- 设备采购管理系统</title>
 	<meta name="keywords" content=" 设备采购管理系统">
-	<meta name="description" content=" 设`备采购管理系统">
+	<meta name="description" content=" 设备采购管理系统">
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,12 +26,12 @@
 	<div class="layui-search">
 		<form class="layui-form">
 			<div class="layui-form-item">
-				<label class="layui-form-label">设备名称</label>
+				<label class="layui-form-label">查询信息</label>
 				<div class="layui-input-inline">
-					<input type="text" name="eqName" id="eqName" autocomplete="off" placeholder="请输入设备名称" class="layui-input">
+					<input type="text" name="eqName" id="eqName" autocomplete="off" placeholder="请输入相关信息" class="layui-input">
 				</div>
 				<button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit>查询</button>
-				<button type="button" class="layui-btn layui-btn-normal btnAdd">+ 新增设备</button>
+				<%--<button type="button" class="layui-btn layui-btn-normal btnAdd">+ 新增设备</button>--%>
 			</div>
 		</form>
 	</div>
@@ -60,13 +60,22 @@ layui.use('table', function(){
             {type:'numbers',title:'序号'},
 			{field:'eqId',  title: '设备编号', align:'center'},
 			{field:'sortName1', title: '所属分类', align:'center'},
+			{field:'username', title: '设备负责人', align:'center'},
             {field:'eqName', title: '设备名称', align:'center'},
             {field:'model', title: '设备型号', align:'center'},
-            {field:'unitPrice', title: '设备单价', align:'center'},
-            {field:'placeOfOrigin', title: '设备产地', align:'center'},
-            {field:'supName', title: '供应商', align:'center'},
+            {field:'unitPrice', title: '设备单价', align:'center',hide:'true'},
+            {field:'placeOfOrigin', title: '设备产地', align:'center',hide:'true'},
+            {field:'supName1', title: '供应商', align:'center'},
+            {field:'isType', title: '设备状态', align:'center', templet:
+						function (d) {
+							if (d.isType === "1") {
+								return "设备管理中";
+							}else if (d.isType ==="3") {
+								return "可借用";
+							}
+						}},
             {field:'remakes', title: '备注', align:'center'},
-			{fixed: 'right',title: '操作', align:'center', toolbar: '#barDemo'}
+			{fixed: 'right',title: '操作', align:'center',toolbar: '#barDemo'	}
 		]],
 		page: true
 	});

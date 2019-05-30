@@ -43,9 +43,9 @@
 <div class="layui-search">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">设备编号</label>
+            <label class="layui-form-label">查询信息</label>
             <div class="layui-input-inline">
-                <input type="text" name="eqId" id="eqId" autocomplete="off" placeholder="请输入设备编号" class="layui-input">
+                <input type="text" name="eqId" id="eqId" autocomplete="off" placeholder="请输入相关信息" class="layui-input">
             </div>
             <button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit>查询</button>
             <button type="button" class="layui-btn layui-btn-normal btnAdd">+ 添加故障设备</button>

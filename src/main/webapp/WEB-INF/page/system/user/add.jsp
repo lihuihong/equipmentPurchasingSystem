@@ -69,9 +69,10 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <div class="layui-form-label">用户备注</div>
-            <div class="layui-input-block">
-                <input type="text" name="remark"  placeholder="请输入用户备注" autocomplete="off" class="layui-input">
+            <div class="layui-form-label">所属部门</div>
+            <div class="layui-input-inline">
+                <select name="departmentId" id="departmentId" lay-verify="required">
+                </select>
             </div>
         </div>
 
@@ -104,6 +105,26 @@
                     });
                     //alert(html);
                     $('#role').html(html);
+                    form.render('select');
+                } else {
+                    layer.alert('抱歉，系统繁忙，请稍后再试！',{icon:2});
+                }
+            },
+        });
+        //获取部门列表
+        $.ajax({
+            url:'/department/list',
+            type:'get',
+            dataType:"json",
+            success:function(data){
+                var html = '';
+                if(data.code===0){
+                    $.each(data.data,function(index,value){
+                        html += '<option value="'+value.id+'">'+value.name+'</option>';
+                        //alert(html);
+                    });
+                    //alert(html);
+                    $('#departmentId').html(html);
                     form.render('select');
                 } else {
                     layer.alert('抱歉，系统繁忙，请稍后再试！',{icon:2});

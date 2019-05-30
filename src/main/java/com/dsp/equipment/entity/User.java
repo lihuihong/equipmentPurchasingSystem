@@ -19,11 +19,29 @@ public class User {
     //电话
     private String phone;
 
-    private Date addTime;
+    private String addTime;
 
     private Integer roleId;
+    private String departmentId;
+    private String departmentId1;
 
     private Role role;
+
+    public String getDepartmentId1() {
+        return departmentId1;
+    }
+
+    public void setDepartmentId1(String departmentId1) {
+        this.departmentId1 = departmentId1;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public Integer getId() {
         return id;
@@ -73,11 +91,11 @@ public class User {
         this.phone = phone;
     }
 
-    public Date getAddTime() {
+    public String getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Date addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
     }
 

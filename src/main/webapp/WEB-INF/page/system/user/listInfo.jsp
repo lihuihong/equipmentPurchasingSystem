@@ -34,7 +34,7 @@
                        autocomplete="off" placeholder="请输入账号" class="layui-input">
             </div>--%>
             <button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit="">查询</button>
-            <button type="button" class="layui-btn layui-btn-normal btnAdd">+ 新增用户</button>
+            <%--<button type="button" class="layui-btn layui-btn-normal btnAdd">+ 新增用户</button>--%>
         </div>
        <%-- <div class="layui-form-item">
             <button type="button" class="layui-btn layui-btn-sm" id="import">导 入</button>
@@ -46,8 +46,8 @@
 </body>
 <script src="/layui/layui.js" charset="utf-8"></script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <%--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>--%>
 </script>
 <script>
     layui.use(["table","upload"],function(){
@@ -66,8 +66,7 @@
                 {field:'departmentId1', title: '所属部门', align:'center'},
                 {field:'email', title: '邮箱', align:'center'},
                 {field:'phone', title: '电话', align:'center'},
-                {field:'addTime', title: '创建时间', align:'center'},
-                {fixed: 'right', width:260, title: '操作', align:'center', toolbar: '#barDemo'}
+                {field:'addTime', title: '创建时间', align:'center'}
             ]],
             page:true
         });

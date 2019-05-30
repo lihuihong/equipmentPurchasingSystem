@@ -26,9 +26,9 @@
 	<div class="layui-search">
 		<form class="layui-form">
 			<div class="layui-form-item">
-				<label class="layui-form-label">设备名称</label>
+				<label class="layui-form-label">查询信息</label>
 				<div class="layui-input-inline">
-					<input type="text" name="eqName" id="eqName" autocomplete="off" placeholder="请输入设备名称" class="layui-input">
+					<input type="text" name="eqName" id="eqName" autocomplete="off" placeholder="请输入相关信息" class="layui-input">
 				</div>
 				<button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit>查询</button>
 			</div>

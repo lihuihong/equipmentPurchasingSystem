@@ -47,9 +47,9 @@
 <div class="layui-search">
     <form class="layui-form">
         <div class="layui-form-item">
-            <label class="layui-form-label">订单编号</label>
+            <label class="layui-form-label">查询信息</label>
             <div class="layui-input-inline">
-                <input type="text" name="orderId" id="orderId" autocomplete="off" placeholder="请输入订单编号"
+                <input type="text" name="orderId" id="orderId" autocomplete="off" placeholder="请输入相关信息"
                        class="layui-input">
             </div>
             <button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit>查询</button>
@@ -62,7 +62,11 @@
 </body>
 <script src=" /layui/layui.js" charset="utf-8"></script>
 <script type="text/html" id="barDemo">
+    {{#  if(d.eqName === '' || d.eqName === null){ }}
+    <a class="layui-btn layui-btn-xs warehousing" lay-event="warehousing1">添加设备信息</a>
+    {{#  } else { }}
     <a class="layui-btn layui-btn-xs warehousing" lay-event="warehousing">入库</a>
+    {{#  } }}
 </script>
 <script type="text/html" id="stateTpl">
     {{#  if(d.status === '审核通过'){ }}
@@ -101,9 +105,25 @@
                 {field: 'status', title: '订单审核', align: 'center', templet: '#switchType'},
                 {field: 'orderTime', title: '订单日期', align: 'center'},
                 {field: 'orderProject', title: '项目名称', align: 'center'},
-                {field: 'supName', title: '供应商名称', align: 'center'},
-                {field: 'userName', title: '采购员', align: 'center'},
-                {field: 'eqName', title: '设备名称', align: 'center'},
+                {field: 'supName', title: '供应商名称', align: 'center', templet:
+                        function (d) {
+                            if (d.supName === "" || d.supName === null) {
+                                return "请先添加设备信息";
+                            } else {
+                                return d.supName;
+                            }
+                        }},
+                {field: 'userName', title: '申请人', align: 'center'},
+                {
+                    field: 'eqName', title: '设备名称', align: 'center', templet:
+                        function (d) {
+                            if (d.eqName === "" || d.eqName === null) {
+                                return "请先添加设备信息";
+                            } else {
+                                return d.eqName;
+                            }
+                        }
+                },
                 {field: 'orderNum', title: '订购数量', align: 'center'},
                 {field: 'budget', title: '预算', align: 'center', hide: true},
                 {
@@ -117,7 +137,7 @@
                 {fixed: 'right', title: '操作', align: 'center', toolbar: '#barDemo'}
             ]],
             page: true,
-            where:{'examine':2}
+            where: {'examine': 2}
             , done: function (res, curr, count) {
                 hoverOpenImg();//显示大图
                 $('table tr').on('click', function () {
@@ -157,39 +177,39 @@
         //监听状态操作
         form.on('switch(type)', function (data) {
             // 获取当前控件
-            var selectIfKey=data.othis;
+            var selectIfKey = data.othis;
             // 获取当前所在行
             var parentTr = selectIfKey.parents("tr");
             // 获取当前所在行的索引
             var parentTrIndex = parentTr.attr("data-index");
             // 获取“是否主键”的值
-            var ifKey=parentTr.find(('td:eq(1)')).text().trim();
+            var ifKey = parentTr.find(('td:eq(1)')).text().trim();
             //开关是否开启，true或者false
             var checked = data.elem.checked;
             //获取所需属性值
             var show = 1;
             if (checked == true) {
-                show=0;
+                show = 0;
             } else {
-                show=1;
+                show = 1;
             }
             $.ajax({
-                url:'/purchase/save',
-                type:'post',
-                data:{"orderId":ifKey,"status":show},
-                dataType:"json",
-                beforeSend:function(){//console.log(JSON.stringify(data.field));
+                url: '/purchase/save',
+                type: 'post',
+                data: {"orderId": ifKey, "status": show},
+                dataType: "json",
+                beforeSend: function () {//console.log(JSON.stringify(data.field));
                 },
-                success:function(data){//do something
-                    if(data.code === 0){
+                success: function (data) {//do something
+                    if (data.code === 0) {
                         layer.msg('修改成功', {icon: 1});
                     } else {
                         layer.msg('修改失败', {icon: 2});
                     }
                     parent.layui.table.reload('tableList');
                 },
-                error:function(data){//do something
-                    layer.msg('与服务器连接失败',{icon: 2});
+                error: function (data) {//do something
+                    layer.msg('与服务器连接失败', {icon: 2});
                 }
             });
         });
@@ -204,7 +224,7 @@
                     $.ajax({
                         url: '/equipment/save',
                         type: 'post',
-                        data: {'isType':1,'eqId':data.eqId},
+                        data: {'isType': 1, 'eqId': data.eqId},
                         dataType: "json",
                         beforeSend: function () {//console.log(JSON.stringify(data.field));
                         },
@@ -213,32 +233,32 @@
                                 $.ajax({
                                     url: '/purchase/save',
                                     type: 'post',
-                                    data: {'examine':0,'orderId':data.orderId},
+                                    data: {'examine': 0, 'orderId': data.orderId},
                                     dataType: "json",
                                     beforeSend: function () {//console.log(JSON.stringify(data.field));
                                     },
                                     success: function (dataInfo1) {//do something
-                                        if (dataInfo1.code == 0) {
-                                                $.ajax({
-                                                    url: '/warehousing/save',
-                                                    type: 'post',
-                                                    data: {'type':1,'orderId':data.orderId,'warePerson':data.userId},
-                                                    dataType: "json",
-                                                    beforeSend: function () {//console.log(JSON.stringify(data.field));
-                                                    },
-                                                    success: function (data) {//do something
-                                                        if (data.code == 0) {
-                                                            layer.msg('入库成功！', {icon: 1});
-                                                            layer.close(index);
-                                                            layui.table.reload('tableList');
-                                                        } else {
-                                                            layer.alert('抱歉，系统繁忙，请稍后再试！', {icon: 2});
-                                                        }
-                                                    },
-                                                    error: function (data) {//do something
-                                                        layer.msg('与服务器连接失败', {icon: 2});
+                                        if (dataInfo1.code === 0) {
+                                            $.ajax({
+                                                url: '/warehousing/save',
+                                                type: 'post',
+                                                data: {'type': 1, 'orderId': data.orderId, 'warePerson': data.userId},
+                                                dataType: "json",
+                                                beforeSend: function () {//console.log(JSON.stringify(data.field));
+                                                },
+                                                success: function (data) {//do something
+                                                    if (data.code == 0) {
+                                                        layer.msg('入库成功！', {icon: 1});
+                                                        layer.close(index);
+                                                        layui.table.reload('tableList');
+                                                    } else {
+                                                        layer.alert('抱歉，系统繁忙，请稍后再试！', {icon: 2});
                                                     }
-                                                });
+                                                },
+                                                error: function (data) {//do something
+                                                    layer.msg('与服务器连接失败', {icon: 2});
+                                                }
+                                            });
                                         } else {
                                             layer.alert('抱歉，系统繁忙，请稍后再试！', {icon: 2});
                                         }
@@ -258,6 +278,25 @@
                     });
                     layer.close(index);
                     layui.table.reload('tableList');
+                });
+            } else if (obj.event === 'warehousing1') {
+                preDate = data;
+                layer.open({
+                    title: '添加设备信息',
+                    type: 2,
+                    area: ['580px', '680px'],
+                    maxmin: true,
+                    btnAlign: 'c',
+                    anim: 0,
+                    shade: [0.5, 'rgb(0,0,0)'],
+                    content: '/page/equipment/equipmentAdd',
+                    zIndex: layer.zIndex, //重点1
+                    success: function (layero) {
+                        //layer.setTop(layero); //顶置窗口
+                    },
+                    yes: function (index, layero) {
+                        //确认按钮
+                    }
                 });
             }
         });

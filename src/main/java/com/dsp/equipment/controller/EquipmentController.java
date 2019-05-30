@@ -144,6 +144,7 @@ public class EquipmentController {
         }
         Result result=new Result();
         if(resultTotal>0){
+            result.setData(fun.getEqId());
             result.setSuccess("成功");
         }else{
             result.setError("失败");

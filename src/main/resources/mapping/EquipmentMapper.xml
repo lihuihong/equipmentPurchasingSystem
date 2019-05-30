@@ -192,7 +192,9 @@
     </delete>
     <!--获取未损坏设备-->
     <select id="all" parameterType="com.dsp.equipment.entity.Equipment"  resultMap="BaseResultMap">
-        select e.*,s.sortName as sortName1  from equipment e left join sort s on e.sortName = s.sortId
+        select e.*,s.sortName as sortName1,su.supName as supName1,sy.trueName as username from equipment e
+         left join sort s on e.sortName = s.sortId left join supplier su on e.supName = su.supId
+         left join sys_user sy on sy.id = e.isUser
         where 1=1 and e.isOk = 0 and e.isEnd = 0
         <if test="eqName!=null and eqName!=''">
             and e.eqName like CONCAT('%',#{eqName},'%')
@@ -203,7 +205,9 @@
     </select>
     <!--获取全部设备-->
     <select id="list" parameterType="com.dsp.equipment.entity.Equipment" resultMap="BaseResultMap">
-        select e.*,s.sortName as sortName1  from equipment e left join sort s on e.sortName = s.sortId
+        select e.*,s.sortName as sortName1,su.supName as supName1,sy.trueName as username from equipment e
+        left join sort s on e.sortName = s.sortId left join supplier su on e.supName = su.supId
+        left join sys_user sy on sy.id = e.isUser
         where 1=1
         <if test="eqName!=null and eqName!=''">
             and eqName like CONCAT('%',#{eqName},'%')
@@ -214,7 +218,9 @@
     </select>
     <!--获取设备已过期-->
     <select id="listIsEnd" parameterType="com.dsp.equipment.entity.Equipment" resultMap="BaseResultMap">
-        select e.*,s.sortName as sortName1  from equipment e left join sort s on e.sortName = s.sortId
+        select e.*,s.sortName as sortName1,su.supName as supName1,sy.trueName as username from equipment e
+        left join sort s on e.sortName = s.sortId left join supplier su on e.supName = su.supId
+        left join sys_user sy on sy.id = e.isUser
         where 1=1 and isEnd = 1
         <if test="eqName!=null and eqName!=''">
             and eqName like CONCAT('%',#{eqName},'%')
@@ -222,7 +228,9 @@
     </select>
     <!--获取设备已损坏-->
     <select id="listIsOk" parameterType="com.dsp.equipment.entity.Equipment" resultMap="BaseResultMap">
-        select e.*,s.sortName as sortName1  from equipment e left join sort s on e.sortName = s.sortId
+        select e.*,s.sortName as sortName1,su.supName as supName1,sy.trueName as username from equipment e
+        left join sort s on e.sortName = s.sortId left join supplier su on e.supName = su.supId
+        left join sys_user sy on sy.id = e.isUser
         where 1=1 and  isOk = 1
         <if test="eqName!=null and eqName!=''">
             and eqName like CONCAT('%',#{eqName},'%')

@@ -12,9 +12,9 @@
 <body>
 <form class="layui-form">
     <div class="layui-form-item layui-elem-quote">
-        <label class="layui-form-label">资源名称</label>
+        <label class="layui-form-label">查询信息</label>
         <div class="layui-input-inline">
-            <input type="text" name="name" id="name" autocomplete="off" placeholder="请输入资源名称" class="layui-input">
+            <input type="text" name="name" id="name" autocomplete="off" placeholder="请输入相关信息" class="layui-input">
         </div>
         <button type="button" class="layui-btn btnSearch" lay-filter="search" lay-submit>查询</button>
         <button type="button" class="layui-btn layui-btn-normal btnAdd">+ 新增资源</button>
